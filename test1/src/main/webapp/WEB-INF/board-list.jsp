@@ -25,11 +25,11 @@
 			</tr>
 			<tr v-for="item in list">
 				<td>{{item.boardNo}}</td>
-				<td>{{item.title}}</td>
-				<td>{{item.userId}}</td>
+				<td><a href="#" @click="fnView(item.boardNo)">{{item.title}}</a></td>
+				<td><a href="#" @click="fnUserInfo(item.userId)">{{item.userName}}</a></td>
 				<td>{{item.hit}}</td>
 				<td>{{item.cdateTime}}</td>
-				<td><button @click="fnRemove(item.boardNo)">삭제<button></td>
+				<td><button @click="fnRemove(item.boardNo)">삭제</button></td>
 			</tr>
 		</table>
 	</div>
@@ -72,7 +72,13 @@
 						self.fnGetList();
 					}
 				});
-			}
+			},
+			fnView(boardNo){
+				$.pageChange("board-view.do",{boardNo : boardNo});
+			},
+			fnUserInfo(userId){
+							$.pageChange("user-info.do",{userId : userId});
+						}
         },
         mounted() {
 			

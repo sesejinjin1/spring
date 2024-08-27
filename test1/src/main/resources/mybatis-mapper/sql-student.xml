@@ -23,7 +23,7 @@
 		
 	<select id="selectStu" parameterType="hashmap" resultType="com.example.test1.model.Student">
 		SELECT * FROM STUDENT
-		WHERE STU_NO = ${stuNo} 
+		WHERE STU_NO = #{stuNo} 
 	</select>
 	
 	<select id="selectSubject" parameterType="hashmap" resultType="com.example.test1.model.Student">

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.test1.mapper.BoardMapper;
 import com.example.test1.model.Board;
+import com.example.test1.model.User;
 
 
 @Service
@@ -58,6 +59,22 @@ public class BoardServiceImpl implements BoardService{
 		return resultMap;
 	}
 
+	@Override
+	public HashMap<String, Object> viewBoard(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> resultMap = new  HashMap<String, Object>();
+		
+		try {
+			Board board = BoardMapper.viewBoard(map);
+			resultMap.put("info", board);
+			resultMap.put("result","success");
+			resultMap.put("message","검색되었습니다.");
+		}catch(Exception e) {
+			resultMap.put("result","fail");
+			resultMap.put("message","예기치 못한 문제 발생");
+		}
+		return resultMap;
+	}
 
 	
 }

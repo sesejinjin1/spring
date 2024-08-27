@@ -9,5 +9,7 @@ public interface BoardService {
 	HashMap<String, Object> removeBoard(HashMap<String,Object> map);
 	//게시글 등록
 	HashMap<String, Object> addBoard(HashMap<String,Object> map);
-	
+	//게시글 보기
+	HashMap<String, Object> viewBoard(HashMap<String,Object> map);
+
 }
