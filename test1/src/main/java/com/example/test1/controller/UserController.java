@@ -32,6 +32,12 @@ public class UserController {
 		
 		return "/join";
 	}
+	@RequestMapping("/user-list.do")
+	public String userList(Model model) throws Exception{
+		
+		return "/user-list";
+	}
+	
 	//유저 정보
 	@RequestMapping("/user-info.do")
 	  public String user_info(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
@@ -39,6 +45,7 @@ public class UserController {
 	  request.setAttribute("userId", map.get("userId"));
     return "/user-info";
 	}
+	
 	@RequestMapping(value = "/user-info.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String user_info(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -52,8 +59,29 @@ public class UserController {
 	@ResponseBody
 	public String join(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap = UserService.join(map);
+		resultMap = UserService.addUser(map);
 		return new Gson().toJson(resultMap);
 	}
-	
+
+	@RequestMapping(value = "/user-list.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String userList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = UserService.searchUserList(map);
+		return new Gson().toJson(resultMap);
+	}
+	@RequestMapping(value = "/user-board.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String userBoardList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = UserService.seelctUserBoard(map);
+		return new Gson().toJson(resultMap);
+	}
+	@RequestMapping(value = "/user-delete.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String userRemove(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = UserService.seelctUserBoard(map);
+		return new Gson().toJson(resultMap);
+	}
 }

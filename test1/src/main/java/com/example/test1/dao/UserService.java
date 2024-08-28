@@ -8,5 +8,14 @@ public interface UserService {
 	
 	
 	//회원가입
-	HashMap<String, Object> join(HashMap<String, Object> map);
+	HashMap<String, Object> addUser(HashMap<String, Object> map);
+	
+	//회원 목록
+	HashMap<String, Object> searchUserList(HashMap<String, Object> map);
+	
+	//게시판 목록
+	HashMap<String, Object> seelctUserBoard(HashMap<String, Object> map);
+	
+	//회원 삭제
+	HashMap<String, Object> userRemove(HashMap<String, Object> map);
 }

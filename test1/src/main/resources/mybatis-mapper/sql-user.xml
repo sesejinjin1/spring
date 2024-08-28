@@ -10,9 +10,23 @@
 	</select>
 	
 		
-	<insert id="join" parameterType="hashmap">
+	<insert id="insertUser" parameterType="hashmap">
 		INSERT INTO 
-		TBL_USER VALUES(#{userId},#{pwd},#{userName},#{email},#{phone},#{gender});
+		TBL_USER VALUES(#{userId},#{pwd},#{userName},#{email},#{phone},#{gender})
 	</insert>
 	
+	<select id="selectUserList" parameterType="hashmap" resultType="com.example.test1.model.User">
+		SELECT * 
+		FROM TBL_USER 
+		WHERE USERID LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<select id="seelctUserBoard" parameterType="hashmap" resultType="com.example.test1.model.Board">
+		SELECT * 
+		FROM TBL_BOARD
+	</select>
+	<delete id="userRemove" parameterType="hashmap">
+		DELETE FROM TBL_USER 
+		WHERE USERID = #{userId}
+	</delete>
 </mapper>
