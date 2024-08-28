@@ -38,6 +38,14 @@ public class UserController {
 		return "/user-list";
 	}
 	
+	//로그인
+	@RequestMapping(value = "/userLogin.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String userLogin(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = UserService.loginUser(map);
+		return new Gson().toJson(resultMap);
+	}
 	//유저 정보
 	@RequestMapping("/user-info.do")
 	  public String user_info(HttpServletRequest request, Model model, @RequestParam HashMap<String, Object> map) throws Exception{
@@ -54,7 +62,7 @@ public class UserController {
 		return new Gson().toJson(resultMap);
 	}
 	
-	
+	//회원가입
 	@RequestMapping(value = "/join.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String join(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -70,6 +78,7 @@ public class UserController {
 		resultMap = UserService.searchUserList(map);
 		return new Gson().toJson(resultMap);
 	}
+	
 	@RequestMapping(value = "/user-board.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String userBoardList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
@@ -77,11 +86,12 @@ public class UserController {
 		resultMap = UserService.seelctUserBoard(map);
 		return new Gson().toJson(resultMap);
 	}
+	//회원 삭제
 	@RequestMapping(value = "/user-delete.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody
 	public String userRemove(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		resultMap = UserService.seelctUserBoard(map);
+		resultMap = UserService.deleteUser(map);
 		return new Gson().toJson(resultMap);
 	}
 }

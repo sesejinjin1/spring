@@ -26,7 +26,7 @@
 			</tr>
 			<tr v-for="item in userList">
 				<td>{{item.userId}}</td>
-				<td>{{item.userName}}</td>
+				<td><a href="#" @click="fnUserInfo(item.userId)">{{item.userName}}</a></td>
 				<td>{{item.email}}</td>
 				<td><button @click="fnRemove(item.userId)">삭제하기</button></td>
 			</tr>
@@ -80,7 +80,9 @@
 			fnRemove(userId){
 				var self = this;
 				var nparmap = {userId : userId};
-
+				if(!confirm("삭제 ?")){
+					return;
+				}
 				$.ajax({
 					url:"user-delete.dox",
 					dataType:"json",	
@@ -88,8 +90,13 @@
 					data : nparmap,
 					success : function(data) { 
 						console.log(userId);
+						self.fnUserList();
 					}
 				});
+			},
+			fnUserInfo(userId){
+				console.log(userId);
+				$.pageChange("user-info.do",{userId : userId});
 			}
         },
         mounted() {

@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 		return resultMap;
 	}
 	@Override
-	public HashMap<String, Object> userRemove(HashMap<String, Object> map) {
+	public HashMap<String, Object> deleteUser(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new HashMap<>();
 		try {
@@ -92,6 +92,21 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			resultMap.put("result", "fail");
 			resultMap.put("result", "문제발생");
+		}
+		return resultMap;
+	}
+	@Override
+	public HashMap<String, Object> loginUser(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		System.out.println("mpl안넘어옴-->>" + map);
+		try {
+			User user = userMapper.userLogin(map);
+			resultMap.put("info", user);
+			resultMap.put("result","success");
+			resultMap.put("message","DB넘기기 성공함.");
+		}catch(Exception e) {
+			resultMap.put("result","fail");
+			resultMap.put("message","문제발생");
 		}
 		return resultMap;
 	}

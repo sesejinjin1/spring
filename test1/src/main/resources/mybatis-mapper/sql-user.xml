@@ -29,4 +29,10 @@
 		DELETE FROM TBL_USER 
 		WHERE USERID = #{userId}
 	</delete>
+		<select id="userLogin" parameterType="hashmap" resultType="com.example.test1.model.User">
+		SELECT * 
+		FROM TBL_USER 
+		WHERE USERID = #{userId} AND PWD = #{userPwd}
+	</select>
+	
 </mapper>

@@ -24,4 +24,6 @@ public interface UserMapper {
 	List<Board> seelctUserBoard(HashMap<String, Object> map);
 	
 	void userRemove(HashMap<String, Object> map);
+	
+	User userLogin(HashMap<String, Object> map);
 }

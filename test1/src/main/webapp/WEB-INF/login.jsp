@@ -17,7 +17,7 @@
 		</div>
 		<div> 패스워드 : <input type="password" placeholder="패스워드" v-model="userPwd">
 		</div>
-		<button @click="fnSave">저장</button>
+		<button @click="fnLogin">로그인!!</button>
 	</div>
 </body>
 </html>
@@ -25,11 +25,32 @@
     const app = Vue.createApp({
         data() {
             return {
-
+				userId : "",
+				userPwd : ""
             };
         },
         methods: {
-			
+			fnLogin(){
+				var self = this;
+				var nparmap = {userId : self.userId , userPwd : self.userPwd};
+
+				$.ajax({
+					url:"userLogin.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : nparmap,
+					success : function(data) { 
+						console.log(data.info);
+						if(data.info == undefined){
+							alert("로그인 실패");
+						}else{
+							alert("로그인 성공");
+							$.pageChange("user-info.do",{userId : self.userId});
+						}
+
+					}
+				});
+			}
 
         },
         mounted() {

@@ -17,5 +17,9 @@ public interface UserService {
 	HashMap<String, Object> seelctUserBoard(HashMap<String, Object> map);
 	
 	//회원 삭제
-	HashMap<String, Object> userRemove(HashMap<String, Object> map);
+	HashMap<String, Object> deleteUser(HashMap<String, Object> map);
+	
+	//로그인
+	HashMap<String, Object> loginUser(HashMap<String, Object> map);
+	
 }

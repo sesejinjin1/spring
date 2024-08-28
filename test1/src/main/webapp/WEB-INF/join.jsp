@@ -36,7 +36,8 @@
 				userName : "",
 				email : "",
 				phone : "",
-				gender : ""
+				gender : "",
+				check : false
             };
         },
         methods: {
@@ -52,6 +53,7 @@
 						success : function(data) { 
 							if(data.info == undefined){
 								alert("사용 가능한 아이디!");
+								self.check = true;
 							}else{
 								alert("이미 사용중인 아이디!");
 							}
@@ -62,7 +64,10 @@
 					var self = this;
 					var nparmap = {userId : self.userId, pwd : self.pwd, userName : self.userName,
 						 email : self.email, phone : self.phone, gender : self.gender};
-
+						 if(self.check==false){
+							alert("아이디 "+ self.userId.length + "중복체크를 해주세요");
+							return;
+						 }
 					$.ajax({
 						url:"join.dox",
 						dataType:"json",	
@@ -70,6 +75,7 @@
 						data : nparmap,
 						success : function(data) { 
 							console.log(data);
+							alert("회원가입 성공 !");
 						}
 					});
 				}
