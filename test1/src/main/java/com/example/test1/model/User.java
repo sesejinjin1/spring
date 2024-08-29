@@ -10,5 +10,12 @@ public class User {
 	private String email;
 	private String phone;
 	private String gender;
+	
+	 public String getuserId(){
+	        return userId;
+	    }
+	 public String getpwd(){
+	        return pwd;
+	    }
 
 }

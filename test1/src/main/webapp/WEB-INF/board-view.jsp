@@ -14,7 +14,7 @@
 <body>
 	<div id="app">
 		<div>제목 : {{info.title}}</div>
-		<div>내용 : {{info.contents}}</div>
+		<div>내용 : <div v-html="info.contents"></div>
 	</div>
 	
 </body>

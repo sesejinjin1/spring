@@ -40,7 +40,9 @@
 					type : "POST", 
 					data : nparmap,
 					success : function(data) { 
+						//콘솔 찍을때 Impl 키값 확인하고 잘 찍기.
 						console.log(data.info);
+						console.log(data.message);
 						if(data.info == undefined){
 							alert("로그인 실패");
 						}else{

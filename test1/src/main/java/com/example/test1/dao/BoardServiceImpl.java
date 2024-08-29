@@ -47,7 +47,7 @@ public class BoardServiceImpl implements BoardService{
 	public HashMap<String, Object> addBoard(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new  HashMap<String, Object>();
-		System.out.print(map);
+		System.out.println(map);
 		try {
 			BoardMapper.insertBoard(map);
 			resultMap.put("result","success");
