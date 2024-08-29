@@ -13,7 +13,14 @@
 <body>
 	<div id="app">
 		<button @click="fnBoardList">게시글목록(userController에서 작성)</button>
-		<div>
+		<div style="margin : 20px;">
+			<select v-model="searchOption">
+				<option value="">::전체::</option>
+				<option value="id">아이디</option>
+				<option value="email">이메일</option>
+			</selct>
+		</div>
+		<div >
 			<input type="text" placeholder="검색" v-model="keyword">
 			<button @click="fnUserList()">검색</button>
 		</div>
@@ -41,13 +48,14 @@
             return {
 				userList : [],
 				keyword : "",
-				userId : ""
+				userId : "",
+				searchOption : ""
             };
         },
         methods: {
 			fnUserList(){
 				var self = this;
-				var nparmap = { keyword : self.keyword};
+				var nparmap = { keyword : self.keyword , searchOption : self.searchOption};
 
 				$.ajax({
 					url:"user-list.dox",
@@ -80,7 +88,7 @@
 			fnRemove(userId){
 				var self = this;
 				var nparmap = {userId : userId};
-				if(!confirm("삭제 ?")){
+				if(!confirm("삭제 하시겠습니까?")){
 					return;
 				}
 				$.ajax({

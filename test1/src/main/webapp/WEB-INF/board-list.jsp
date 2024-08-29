@@ -9,12 +9,25 @@
 	
 </head>
 <style>
-	table, tr, th ,td { border: 1px solid #aaa;}
+	table, tr, th ,td { border: 1px solid #aaa;margin : 20px;}
 </style>
 <body>
 	<div id="app">
-		<div>검색 : <input type="text" placeholder="검색어" v-model="keyword"> <button @click="fnGetList">검색</button></div>
-		<table>
+		<ul style="margin : 20px;">
+			<li><a href="#" @click="fnCategoryList('')">:: 전체 ::</a></li>
+			<li><a href="#" @click="fnCategoryList('1')">1 : 공지사항</a></li>
+			<li><a href="#" @click="fnCategoryList('2')">2 : 자유게시판</a></li>
+			<li><a href="#" @click="fnCategoryList('3')">3 : 질문게시판</a></li>
+		</ul>
+		<div  style="margin : 20px;">
+			<select v-model="searchOption">
+				<option value="">:: 전체 ::</option>
+				<option value="title">제목</option>
+				<option value="userName">작성자</option>
+			<select>
+			<div>검색 : <input type="text" placeholder="검색어" v-model="keyword"> <button @click="fnGetList">검색</button></div>
+		</div>
+		<table >
 			<tr>
 				<th>번호</th>
 				<th>제목</th>
@@ -40,13 +53,15 @@
         data() {
             return {
 				list : [],
-				keyword : ""
+				keyword : "",
+				searchOption : "",
+				cateNum : ""
             };
         },
         methods: {
             fnGetList(){
 				var self = this;
-				var nparmap = {keyword : self.keyword};
+				var nparmap = {keyword : self.keyword, searchOption : self.searchOption, cateNum : self.cateNum};
 				$.ajax({
 					url:"board-list.dox",
 					dataType:"json",	
@@ -62,6 +77,9 @@
 			fnRemove(boardNo){
 				var self = this;
 				var nparmap = {boardNo : boardNo};
+				if(!confirm("삭제 하시겠습니까?")){
+					return;
+				}
 				$.ajax({
 					url:"board-remove.dox",
 					dataType:"json",	
@@ -78,13 +96,16 @@
 			},
 			fnUserInfo(userId){
 							$.pageChange("user-info.do",{userId : userId});
-						}
+						},
+			fnCategoryList(cateNum){
+				var self = this;
+				self.cateNum = cateNum;
+				self.fnGetList();
+			}
         },
         mounted() {
-			
             var self = this;
 			self.fnGetList();
-			
         }
     });
 

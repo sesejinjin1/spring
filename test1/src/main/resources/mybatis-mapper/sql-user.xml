@@ -18,7 +18,17 @@
 	<select id="selectUserList" parameterType="hashmap" resultType="com.example.test1.model.User">
 		SELECT * 
 		FROM TBL_USER 
-		WHERE USERID LIKE '%' || #{keyword} || '%'
+		WHERE 
+		
+		<if test="searchOption == ''">
+			USERID LIKE '%' || #{keyword} || '%' OR EMAIL LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="searchOption == 'id'">
+			USERID LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="searchOption == 'email'">
+			EMAIL LIKE '%' || #{keyword} || '%'
+		</if>
 	</select>
 	
 	<select id="seelctUserBoard" parameterType="hashmap" resultType="com.example.test1.model.Board">

@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 	public HashMap<String, Object> searchUserList(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
-		
+		System.out.println(map);
 		try {
 			List<User> list = userMapper.selectUserList(map);
 			resultMap.put("list",list);
