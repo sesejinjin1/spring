@@ -27,6 +27,7 @@
             return {
 				userId : "",
 				userPwd : ""
+				
             };
         },
         methods: {
@@ -47,7 +48,7 @@
 							alert("로그인 실패");
 						}else{
 							alert("로그인 성공");
-							$.pageChange("user-info.do",{userId : self.userId});
+							location.href="board-list.do";
 						}
 
 					}

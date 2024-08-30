@@ -118,6 +118,9 @@ public class UserServiceImpl implements UserService {
 				resultMap.put("info", user);
 				resultMap.put("result","success");
 				resultMap.put("message","DB넘기기 성공함.");
+				session.setAttribute("sessionId", user.getuserId());
+				session.setAttribute("sessionName", user.getuserName());
+				session.setAttribute("sessionStatus", user.getStatus());
 			}
 		}catch(Exception e) {
 			resultMap.put("result","fail");

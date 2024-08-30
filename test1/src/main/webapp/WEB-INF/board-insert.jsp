@@ -40,7 +40,8 @@
             return {
 				list : [],
 				title : "",
-				contents : ""
+				contents : "",
+				sessionId : '${sessionId}'
 				
             };
         },
@@ -48,7 +49,7 @@
 			// fnSave 생성 후 board-add.dox 호출해서 저장
 			fnSave(){
 				var self = this;
-				var nparam = {title : self.title, contents : self.contents}
+				var nparam = {title : self.title, contents : self.contents , sessionId : self.sessionId}
 				$.ajax({
 								url:"board-add.dox",
 								dataType:"json",	

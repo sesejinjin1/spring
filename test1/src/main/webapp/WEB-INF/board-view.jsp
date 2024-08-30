@@ -13,8 +13,11 @@
 </style>
 <body>
 	<div id="app">
+
 		<div>제목 : {{info.title}}</div>
-		<div>내용 : <div v-html="info.contents"></div>
+		<div>내용 : <span v-html="info.contents"></div>
+		<div> 작성자 : {{info.userId}} </div>
+		<div v-if="info.userId == sessionId || sessionStatus =='A'"><button @click="fnRemove(info.boardNo)">삭제버튼</button></div
 	</div>
 	
 </body>
@@ -24,27 +27,46 @@
         data() {
             return {
 				boardNo : '${boardNo}',
-				info : {}
+				info : {},
+				sessionId : '${sessionId}',
+				sessionStatus : '${sessionStatus}'
+				
 				
             };
         },
         methods: {
 			fnGetList(){
-						var self = this;
-						var nparmap = {boardNo : self.boardNo};
-						$.ajax({
-							url:"board-view.dox",
-							dataType:"json",	
-							type : "POST", 
-							data : nparmap,
-							success : function(data) { 
-								console.log(data);
-								self.info=data.info;
-							}
-						});
-			          }
-		
-        },
+					var self = this;
+					var nparmap = {boardNo : self.boardNo};
+					$.ajax({
+						url:"board-view.dox",
+						dataType:"json",	
+						type : "POST", 
+						data : nparmap,
+						success : function(data) { 
+							console.log(data);
+							self.info=data.info;
+						}
+					});
+			    },
+		  fnRemove(boardNo){
+				  	var self = this;
+				  	var nparmap = {boardNo : boardNo};
+				  	if(!confirm("삭제 하시겠습니까?")){
+				  		return;
+				  	}
+				  	$.ajax({
+				  		url:"board-remove.dox",
+				  		dataType:"json",	
+				  		type : "POST", 
+				  		data : nparmap,
+				  		success : function(data) { 
+				  			alert(data.message);
+				  			location.href="board-list.do";
+				  		}
+				  	});
+			  }
+	  },
         mounted() {
 			var self = this;
            	self.fnGetList();
