@@ -36,6 +36,7 @@ public class BoardController {
 		resultMap = BoardService.searchBoardList(map);
 		return new Gson().toJson(resultMap);
 	}
+
 	
 	//게시글 삭제 
 	@RequestMapping(value = "/board-remove.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
@@ -66,7 +67,13 @@ public class BoardController {
 		resultMap = BoardService.viewBoard(map);
 		return new Gson().toJson(resultMap);
 	}
-
+//	@RequestMapping(value = "/board-comment.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+//	@ResponseBody
+//	public String boardComment(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+//		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+//		resultMap = BoardService.searchBoardList(map);
+//		return new Gson().toJson(resultMap);
+//	}
 	
 	@RequestMapping(value = "/board-add.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
 	@ResponseBody

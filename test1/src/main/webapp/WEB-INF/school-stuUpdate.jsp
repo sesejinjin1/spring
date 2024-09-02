@@ -14,7 +14,6 @@
 <body>
 	<div id="app">
 		
-		<div>아이디 :<input type="text" v-model="id"></div>
 		<div>이름 : <input type="text" v-model="name" ></div>
 		<div>학년 : <input type="text" v-model="grade" ></div>
 		<button @click="fnSave"> 저장 </button>
@@ -28,7 +27,6 @@
             return {
 				info : {},
 				stuNo : '${stuNo}',
-				id : "",
 				name : "" ,
 				grade : ""
             };
@@ -50,7 +48,7 @@
 			    },
 				fnSave(){
 					var self = this;
-					var nparam = {stuNo : self.stuNo , id : self.id, name : self.name , grade : self.grade}
+					var nparam = {stuNo : self.stuNo , name : self.name , grade : self.grade}
 					$.ajax({
 									url:"stuUpdate.dox",
 									dataType:"json",	
@@ -58,6 +56,7 @@
 									data : nparam,
 									success : function(data) { 
 										console.log(data);
+										location.href="school-stu.do"
 									}
 								});
 					}

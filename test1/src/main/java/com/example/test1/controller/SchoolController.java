@@ -57,6 +57,7 @@ public class SchoolController {
 	@ResponseBody
 	public String board_insert(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		System.out.println("Cotroll>>> "+ map);
 		resultMap = schoolService.updateStu(map);
 		return new Gson().toJson(resultMap);
 	}

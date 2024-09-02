@@ -3,6 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 	<meta charset="UTF-8">
 	<jsp:include page="/layout/menu.jsp"></jsp:include>
 	<title>첫번째 페이지</title>
@@ -15,7 +18,19 @@
 		
 		<input type="text" placeholder="학번" v-model="stuNo">
 		<button @click="fnSearch()">검색</button>
-		
+		<div>
+		<i class="fa-solid fa-image"></i>
+		<i class="fa-solid fa-paperclip"></i>
+		<i class="fa-solid fa-gear"></i>
+		</div>
+		<div>
+			<span class="material-symbols-outlined">
+			favorite
+			</span>
+			<span class="material-symbols-outlined">
+			favorite
+			</span>
+		</div>
 		{{info}}	
 	</div>
 </body>

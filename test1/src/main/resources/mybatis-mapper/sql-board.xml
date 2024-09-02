@@ -20,7 +20,8 @@
 		<if test="searchOption == 'userName'">
 			AND USERNAME LIKE '%' || #{keyword} || '%'
 		</if>
-		
+		ORDER BY CDATETIME DESC  
+		OFFSET #{startIndex} ROWS FETCH FIRST #{outputNumber} ROWS ONLY 
 		
 		
 		<!--<choose>
@@ -51,5 +52,28 @@
 		SELECT * FROM TBL_BOARD 
 		WHERE BOARDNO = #{boardNo}
 	</select>
-
+	
+	<select id="countBoard" parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) CNT FROM TBL_BOARD B
+		INNER JOIN TBL_USER U ON B.USERID = U.USERID 
+		WHERE 1=1
+		<if test="cateNum !='' and cateNum != null">
+			AND CATEGORY = #{cateNum}
+		</if>
+		<if test="searchOption == ''">
+			AND (TITLE LIKE '%' || #{keyword} || '%' 
+			OR USERNAME LIKE '%' || #{keyword} || '%')
+		</if>
+		<if test="searchOption == 'title'">
+			AND TITLE LIKE '%' || #{keyword} || '%'
+		</if>
+		<if test="searchOption == 'userName'">
+			AND USERNAME LIKE '%' || #{keyword} || '%'
+		</if>
+	</select>
+	<select id="boardComment" parameterType="hashmap" resultType="com.example.test1.model.Board">
+		SELECT *FROM TBL_COMMENT C 
+		INNER JOIN TBL_USER U ON C.USERID = U.USERID 
+		WHERE BOARDNO = #{boardNo}
+	</select>
 </mapper>

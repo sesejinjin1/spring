@@ -10,10 +10,22 @@
 </head>
 <style>
 	table, tr, th ,td { border: 1px solid #aaa;}
+	.pagination {justify-content: center;align-items: center;margin: 20px 0;}
+
+	.pagination button {background-color: #f8f9fa;border: 1px solid #dee2e6;color: #007bff;padding: 8px 12px;margin: 0 2px;cursor: pointer;transition: background-color 0.3s, color 0.3s;border-radius: 4px;}
+	.pagination button:hover {background-color: #007bff;color: white;}
+	.pagination button.active {background-color: #007bff;color: white;cursor: default;}
+	.pagination button:disabled {background-color: #e9ecef;color: #6c757d;cursor: not-allowed;border: 1px solid #dee2e6;}
+	.pagination button:not(.active):not(:disabled):hover {background-color: #0056b3;color: white;}
+		
 </style>
 <body>
 	<div id="app">
-		스쿨페이지 
+		<select v-model="size" @change="fnGetList(1)">
+			<option value="5">5</option>
+			<option value="10">10</option>
+			<option value="15">15</option>
+		</select>
 		<table>
 			<tr>
 				<th>학번</th>
@@ -31,6 +43,14 @@
 			</tr>
 			
 		</table>
+		<div class="pagination">
+						    <button v-if="currentPage > 1" >이전</button>
+						    <button v-for="page in totalPages" :class="{active: page == currentPage}"  @click="fnGetList(page)" >
+						        {{ page }}
+						    </button>
+						    <button v-if="currentPage < totalPages" >다음</button>
+				</div>
+				
 	</div>
 </body>
 </html>
@@ -39,12 +59,20 @@
         data() {
             return {
 				list : [],
+				currentPage: 1,      
+				pageSize: 10,        
+				totalPages: 3,
+				size : 5
             };
         },
         methods: {
-			fnGetList(){
+			fnGetList(page){
 				var self = this;
-				var nparmap = {};
+				self.pageSize = self.size;
+				var startIndex = (page-1) * self.pageSize;
+				var outputNumber = self.pageSize;
+				self.currentPage = page
+				var nparmap = {startIndex : startIndex , outputNumber : outputNumber};
 				$.ajax({
 					url:"school-stu.dox",
 					dataType:"json",	
@@ -53,6 +81,8 @@
 					success : function(data) { 
 						console.log(data);
 						console.log(data.list);
+						console.log(data.cnt);
+						self.totalPages = Math.ceil(data.cnt/self.pageSize);
 						self.list=data.list;
 					}
 				});
@@ -66,7 +96,7 @@
         },
         mounted() {
 			var self = this;
-			self.fnGetList();
+			self.fnGetList(1);
         }
     });
 

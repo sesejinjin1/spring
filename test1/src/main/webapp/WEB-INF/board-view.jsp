@@ -13,12 +13,17 @@
 </style>
 <body>
 	<div id="app">
-
+		<div>글번호 : {{info.boardNo}}</div>
 		<div>제목 : {{info.title}}</div>
 		<div>내용 : <span v-html="info.contents"></div>
 		<div> 작성자 : {{info.userId}} </div>
-		<div v-if="info.userId == sessionId || sessionStatus =='A'"><button @click="fnRemove(info.boardNo)">삭제버튼</button></div
+		<div v-if="info.userId == sessionId || sessionStatus =='A'"><button @click="fnRemove(info.boardNo)">삭제버튼</button></div>
+		<div>
+			{{commentList[0]}} </br>
+			{{commentList[1]}}
+		</div>
 	</div>
+	
 	
 </body>
 </html>
@@ -29,8 +34,8 @@
 				boardNo : '${boardNo}',
 				info : {},
 				sessionId : '${sessionId}',
-				sessionStatus : '${sessionStatus}'
-				
+				sessionStatus : '${sessionStatus}',
+				commentList : []
 				
             };
         },
@@ -46,6 +51,7 @@
 						success : function(data) { 
 							console.log(data);
 							self.info=data.info;
+							self.commentList=data.commentList;
 						}
 					});
 			    },
@@ -65,7 +71,21 @@
 				  			location.href="board-list.do";
 				  		}
 				  	});
-			  }
+			  },
+/*		fnGetComment(boardNo){
+					var self = this;
+					var nparmap= {boardNo : boardNo};
+					$.ajax({
+					url:"board-view.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : nparmap,
+					success : function(data) { 
+						console.log(data);
+					}
+				});
+			
+		}*/
 	  },
         mounted() {
 			var self = this;

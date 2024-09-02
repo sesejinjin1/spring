@@ -19,5 +19,11 @@ public interface BoardMapper {
 	
 	//게시글 상세정보 pk로 검색시엔 하나만 나오기 때문에 list로 감쌀 이유가 없음
 	Board viewBoard(HashMap<String, Object> map);
+	
+	//카운트
+	int countBoard(HashMap<String, Object> map);
+	
+	//댓글리스트
+	List<Board> boardComment(HashMap<String, Object> map);
 
 }

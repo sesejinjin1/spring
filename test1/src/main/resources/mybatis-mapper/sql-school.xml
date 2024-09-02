@@ -6,8 +6,9 @@
 
 	<select id="stuList"  parameterType="hashmap" resultType="com.example.test1.model.School">
 		SELECT STUNO,NAME,GRADE,SUBSTR(ID,1,LENGTH(ID)-3) || '***' AS ID,
-		SUBSTR(JUMIN,1,6) || '-' || SUBSTR(JUMIN,7,1) || '******' AS JUMIN 
-		fROM STU
+		SUBSTR(JUMIN,1,6) || '-' || SUBSTR(JUMIN,7,1) || '******' AS JUMIN  
+		FROM STU ORDER BY STUNO DESC 
+		OFFSET #{startIndex} ROWS FETCH FIRST #{outputNumber} ROWS ONLY
 	</select>
 	<select id="viewStu" parameterType="hashmap" resultType="com.example.test1.model.School">
 		SELECT S.ID, S.GRADE, S.STUNO, S.NAME, D2.DNAME AS DNAME1 , D.DNAME AS DNAME2, P.NAME AS PNAME FROM STU S 
@@ -17,6 +18,9 @@
 		WHERE STUNO = #{stuNo}
 	</select>
 	<update id="updateStu" parameterType="hashmap">
-		UPDATE STU SET NAME = #{name}, ID = #{id} ,GRADE = #{grade} WHERE STUNO = #{stuNo}
+		UPDATE STU SET NAME = #{name}, GRADE = #{grade} WHERE STUNO = #{stuNo}
 	</update>
+	<select id="stuListCnt"  parameterType="hashmap" resultType="int">
+		SELECT COUNT(*) FROM STU
+	</select>
 </mapper>

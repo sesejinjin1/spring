@@ -26,4 +26,6 @@ public interface UserMapper {
 	void userRemove(HashMap<String, Object> map);
 	
 	User userLogin(HashMap<String, Object> map);
+	
+	
 }

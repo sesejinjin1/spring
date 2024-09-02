@@ -22,7 +22,9 @@ public class BoardServiceImpl implements BoardService{
 		// TODO Auto-generated method stub
 		HashMap<String, Object> resultMap = new  HashMap<String, Object>();
 		List<Board> list = BoardMapper.selectBoardList(map);
+		int cnt = BoardMapper.countBoard(map);
 		resultMap.put("list",list);
+		resultMap.put("cnt",cnt);
 		resultMap.put("result","success");
 		
 		return resultMap;
@@ -66,6 +68,8 @@ public class BoardServiceImpl implements BoardService{
 		
 		try {
 			Board board = BoardMapper.viewBoard(map);
+			List<Board> commentList = BoardMapper.boardComment(map);
+			resultMap.put("commentList", commentList);
 			resultMap.put("info", board);
 			resultMap.put("result","success");
 			resultMap.put("message","검색되었습니다.");
