@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.test1.mapper.ChartMapper">
+	
+	<select id="selectChart" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT * FROM 
+		TBL_PAYMENT
+	</select>
+	
+	
+	<select id="selectArea" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT DISTINCT SI 
+		FROM TBL_AREA ORDER BY SI
+	</select>
+	
+	<select id="selectAreaGu" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT SI, GU 
+		FROM TBL_AREA 
+		WHERE SI = #{dosi} GROUP BY SI, GU
+	</select>
+	
+	<select id="selectAreaDong" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT SI, GU ,DONG
+		FROM TBL_AREA 
+		WHERE SI = #{dosi} AND GU = #{gu} GROUP BY SI, GU ,DONG
+	</select>
+</mapper>

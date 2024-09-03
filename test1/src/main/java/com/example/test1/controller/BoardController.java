@@ -82,6 +82,5 @@ public class BoardController {
 		resultMap = BoardService.addBoard(map);
 		return new Gson().toJson(resultMap);
 	}
-
-
+ 
 }
