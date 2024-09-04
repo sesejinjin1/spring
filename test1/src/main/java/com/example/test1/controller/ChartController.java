@@ -44,4 +44,19 @@ public class ChartController {
 		resultMap = chartservice.viewArea(map);
 		return new Gson().toJson(resultMap);
 	}
+	@RequestMapping("/juso.do")
+	  public String juso(Model model) throws Exception{
+
+		return "/juso";
+	}
+	@RequestMapping("/jusoPopup.do")
+	  public String jusoPopup(Model model) throws Exception{
+
+		return "/jusoPopup";
+	}
+	@RequestMapping("/jusoSample.do")
+	  public String jusoSample(Model model) throws Exception{
+
+		return "/Sample";
+	}
 }
