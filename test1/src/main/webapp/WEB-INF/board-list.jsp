@@ -70,7 +70,6 @@
 				    </button>
 				    <button v-if="currentPage < totalPages" >다음</button>
 		</div>
-	카운트 {{boardCnt.cnt}}
 	</div>
 </body>
 </html>

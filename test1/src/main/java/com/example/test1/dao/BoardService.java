@@ -12,4 +12,5 @@ public interface BoardService {
 	//게시글 보기
 	HashMap<String, Object> viewBoard(HashMap<String,Object> map);
 	
+	
 }

@@ -25,5 +25,8 @@ public interface BoardMapper {
 	
 	//댓글리스트
 	List<Board> boardComment(HashMap<String, Object> map);
+	
+	//파일 업로드
+	void insertFile(HashMap<String, Object> map);
 
 }

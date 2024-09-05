@@ -43,7 +43,7 @@
 		WHERE BOARDNO = #{boardNo} 
 	</delete>
 	
-	<insert id="insertBoard" parameterType="hashmap">
+	<insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="boardNo" keyColumn="boardNo">
 		INSERT INTO 
 		TBL_BOARD(BOARDNO, TITLE, CONTENTS, USERID, HIT, CDATETIME, UDATETIME) 
 		VALUES(BOARD_SEQ.NEXTVAL,#{title},#{contents},#{sessionId},0,SYSDATE,SYSDATE)	
@@ -76,4 +76,9 @@
 		INNER JOIN TBL_USER U ON C.USERID = U.USERID 
 		WHERE BOARDNO = #{boardNo}
 	</select>
+	<insert id="insertFile" parameterType="hashmap" >	
+		INSERT INTO 
+		TBL_BOARDFILE  
+		VALUES(BOARDFILE_SEQ.NEXTVAL,#{idx},#{filename},#{originFilename},#{path},#{size},#{fileext} ,'N')	
+	</insert>
 </mapper>

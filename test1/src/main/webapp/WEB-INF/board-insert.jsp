@@ -26,11 +26,15 @@
 				<td><input type="text" placeholder="제목" v-model="title" style="width:99%;"></td>
 			</tr>
 			<tr>
+				<th>파일첨부</th>
+				<td><input type="file" @change="fnFileChange"/></td>
+			</tr>
+			<tr>
 				<th>내용</th>
 				<td><div><div id="editor"></div></td>
 			</tr>
 		</table>
-		<button @click="fnSave">저장</button>
+		<button @click="fnSave" style="width : 100px; height : 50px; margin : 40px;">저장</button>
 	</div>
 </body>
 </html>
@@ -41,28 +45,54 @@
 				list : [],
 				title : "",
 				contents : "",
-				sessionId : '${sessionId}'
+				sessionId : '${sessionId}',
+				file : null
 				
             };
         },
         methods: {
 			// fnSave 생성 후 board-add.dox 호출해서 저장
+			fnFileChange(event) {
+				this.file = event.target.files[0];
+			},
 			fnSave(){
 				var self = this;
 				var nparam = {title : self.title, contents : self.contents , sessionId : self.sessionId}
 				$.ajax({
-								url:"board-add.dox",
-								dataType:"json",	
-								type : "POST", 
-								data : nparam,
-								success : function(data) { 
-									console.log(data.resul);
-									alert(data.message);
-									if(data.result =="success"){
-										location.href = "board-list.do";
+					url:"board-add.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : nparam,
+					success : function(data) { 
+						console.log(data.result);
+						alert(data.message);
+						if(data.result =="success"){
+							var idx = data.idx;
+							console.log(data.idx);
+//							location.href = "board-list.do";
+
+								if (self.file) { //파일등록 (등록할 파일이 있을때)
+									  const formData = new FormData();
+									  formData.append('file1', self.file);
+									  formData.append('idx', idx);
+										// append -> 이어붙이는 개념
+									  $.ajax({
+										url: '/fileUpload.dox',
+										type: 'POST',
+										data: formData,
+										processData: false,  
+										contentType: false,  
+										success: function() {
+										  console.log('업로드 성공!');
+										},
+										error: function(jqXHR, textStatus, errorThrown) {
+										  console.error('업로드 실패!', textStatus, errorThrown);
+										}
+									  });  
 									}
 								}
-							});
+							}
+						});
 			}
         },
         mounted() {

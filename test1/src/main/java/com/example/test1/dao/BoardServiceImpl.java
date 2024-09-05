@@ -52,6 +52,8 @@ public class BoardServiceImpl implements BoardService{
 		System.out.println(map);
 		try {
 			BoardMapper.insertBoard(map);
+			System.out.println("service >>>>"+map);
+			resultMap.put("idx", map.get("boardNo"));
 			resultMap.put("result","success");
 			resultMap.put("message","등록되었습니다.");
 		}catch(Exception e) {
