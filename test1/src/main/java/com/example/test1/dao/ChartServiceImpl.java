@@ -43,6 +43,25 @@ public class ChartServiceImpl implements ChartService{
 		return resultMap;
 	}
 
+	@Override
+	public HashMap<String, Object> empList(HashMap<String, Object> map) {
+		
+		HashMap<String, Object> resultMap = new  HashMap<String, Object>();
+		List<Chart> list = chartMapper.selectEmp(map);
+		resultMap.put("list",list);
+		resultMap.put("result","success");
+		return resultMap;
+	}
+
+	@Override
+	public HashMap<String, Object> empCheckList(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new  HashMap<String, Object>();
+		List<Chart> list = chartMapper.selectEmpCheck(map);
+		resultMap.put("list",list);
+		resultMap.put("result","success");
+		return resultMap;
+	}
+
 
 
 	

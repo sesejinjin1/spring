@@ -82,5 +82,19 @@ public class BoardServiceImpl implements BoardService{
 		return resultMap;
 	}
 
+	@Override
+	public HashMap<String, Object> removeBoardCheck(HashMap<String, Object> map) {
+		HashMap<String, Object> resultMap = new  HashMap<String, Object>();
+		System.out.print(map);
+		try {
+			BoardMapper.deleteCheckBoard(map);
+			resultMap.put("message","삭제되었습니다.");
+		}catch(Exception e) {
+			resultMap.put("message","예기치 못한 문제 발생");
+		}
+		
+		return resultMap;
+	}
+
 	
 }

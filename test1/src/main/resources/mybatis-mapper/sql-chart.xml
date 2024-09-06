@@ -26,4 +26,13 @@
 		FROM TBL_AREA 
 		WHERE SI = #{dosi} AND GU = #{gu} GROUP BY SI, GU ,DONG
 	</select>
+	<select id="selectEmp" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT * FROM EMP
+	</select>
+	
+	<select id="selectEmpCheck" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT * FROM EMP WHERE EMP IN 
+		<foreach collection="list" item="item" open="(" close=")" separator=","> #{item}</foreach>
+	</select>
+	
 </mapper>

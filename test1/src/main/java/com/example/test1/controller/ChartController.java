@@ -1,6 +1,7 @@
 package com.example.test1.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.test1.dao.ChartService;
+import com.example.test1.model.Student;
 import com.google.gson.Gson;
 
 @Controller
@@ -58,5 +60,26 @@ public class ChartController {
 	  public String jusoSample(Model model) throws Exception{
 
 		return "/Sample";
+	}
+	@RequestMapping("/emp.do")
+	  public String emp(Model model) throws Exception{
+
+		return "/emp";
+	}
+	@RequestMapping(value = "/emp.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String empList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = chartservice.empList(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+	}
+	@RequestMapping(value = "/empcheck.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String empCheckList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = chartservice.empCheckList(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
 	}
 }

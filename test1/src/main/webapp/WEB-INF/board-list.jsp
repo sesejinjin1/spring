@@ -45,6 +45,7 @@
 		</div>
 		<table >
 			<tr>
+				<th>체크</th>
 				<th>번호</th>
 				<th>제목</th>
 				<th>작성자</th>
@@ -53,6 +54,7 @@
 				<th>삭제</th>
 			</tr>
 			<tr v-for="item in list">
+				<td><input type="checkbox" v-model="selectItem" :value="item.boardNo"></td>
 				<td>{{item.boardNo}}</td>
 				<td><a href="#" @click="fnView(item.boardNo)">{{item.title}}</a></td>
 				<td><a href="#" @click="fnUserInfo(item.userId)">{{item.userName}}</a></td>
@@ -61,14 +63,15 @@
 				<td><button @click="fnRemove(item.boardNo)">삭제</button></td>
 			</tr>
 		</table>
+		<button type="button" @click="fnCheckRemove">선택 삭제</button>
 		<div><button @click="fnInsert">글쓰기</button></div>
 		
 		<div class="pagination">
-				    <button v-if="currentPage > 1" >이전</button>
-				    <button v-for="page in totalPages" :class="{active: page == currentPage}"  @click="fnGetList(page)" >
-				        {{ page }}
-				    </button>
-				    <button v-if="currentPage < totalPages" >다음</button>
+		    <button v-if="currentPage > 1"  @click="fnGetList(currentPage-1)"  >이전</button>
+		    <button v-for="page in totalPages" :class="{active: page == currentPage}"  @click="fnGetList(page)" >
+		        {{ page }}
+		    </button>
+		    <button v-if="currentPage < totalPages" @click="fnGetList(currentPage+1)" >다음</button>
 		</div>
 	</div>
 </body>
@@ -86,7 +89,8 @@
 				pageSize: 5,        
 				totalPages: "",
 				boardCnt : [],
-				size : 5
+				size : 5,
+				selectItem : []
 				
             };
         },
@@ -141,6 +145,20 @@
 			},
 			fnInsert(){
 				location.href="board-insert.do";
+			},
+			fnCheckRemove(){
+				var self = this;
+				var fList = JSON.stringify(self.selectItem);
+				var nparmap = {selectItem : fList};
+				$.ajax({
+					url:"check-remove.dox",
+					dataType:"json",	
+					type : "POST", 
+					data : nparmap,
+					success : function(data) {
+						self.fnGetList(1); 
+					}
+				});
 			}
         },
         mounted() {

@@ -42,6 +42,13 @@
 		DELETE FROM TBL_BOARD 
 		WHERE BOARDNO = #{boardNo} 
 	</delete>
+		
+	<delete id="deleteCheckBoard" parameterType="hashmap">
+		DELETE FROM TBL_BOARD 
+		WHERE BOARDNO IN 
+		<foreach collection="list" item="item" open="(" close=")" separator=","> #{item}</foreach>
+		<!--보낼때list로 보냈으니 collection으로 받을떄도 list로 . item으로 꺼내겠다 시작할때 ( 끝날떄 ) 중간 짤라줄때 , 넣어준다.-->
+	</delete>
 	
 	<insert id="insertBoard" parameterType="hashmap" useGeneratedKeys="true" keyProperty="boardNo" keyColumn="boardNo">
 		INSERT INTO 

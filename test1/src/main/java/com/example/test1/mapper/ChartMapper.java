@@ -21,4 +21,9 @@ public interface ChartMapper {
 	//dong
 	List<Chart> selectAreaDong(HashMap<String, Object> map);
 	
+	//emplist
+	List<Chart> selectEmp(HashMap<String, Object> map);
+	
+	//empchecklist
+	List<Chart> selectEmpCheck(HashMap<String, Object> map);
 }
