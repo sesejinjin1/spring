@@ -35,4 +35,19 @@
 		<foreach collection="list" item="item" open="(" close=")" separator=","> #{item}</foreach>
 	</select>
 	
+	<select id="itemList" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT * FROM TBL_CODE C 
+		INNER JOIN TBL_ITEM I ON C.CODE = I.CATEGORY1 
+		WHERE 1 = 1 
+		<!--<if test="list != null"> << 안되는거 해결하기-->
+		<if test="list.size()>0">
+			AND CODE IN <foreach collection="list" item="item" open="(" close=")" separator=","> #{item}</foreach>
+		</if>
+	</select>
+	
+	<select id="codeList" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT * FROM TBL_CODE
+	</select>
+
+	
 </mapper>

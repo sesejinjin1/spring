@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.test1.dao.ChartService;
-import com.example.test1.model.Student;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 @Controller
@@ -79,6 +80,26 @@ public class ChartController {
 	public String empCheckList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
 		HashMap<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap = chartservice.empCheckList(map);
+		resultMap.put("result", "success");
+		return new Gson().toJson(resultMap);
+	}
+	
+	@RequestMapping("/item.do")
+	  public String item(Model model) throws Exception{
+
+		return "/item";
+	}
+	@RequestMapping(value = "/item.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String itemList(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		
+		String json = map.get("selectItem").toString(); 
+		ObjectMapper mapper = new ObjectMapper();
+		List<Object> list = mapper.readValue(json, new TypeReference<List<Object>>(){});
+		map.put("list", list);
+		
+		resultMap = chartservice.itemList(map);
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);
 	}

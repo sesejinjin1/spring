@@ -26,4 +26,11 @@ public interface ChartMapper {
 	
 	//empchecklist
 	List<Chart> selectEmpCheck(HashMap<String, Object> map);
+	
+	//itemList
+	List<Chart> itemList(HashMap<String, Object> map);
+	
+	//codeList
+	List<Chart> codeList(HashMap<String, Object> map);
+	
 }

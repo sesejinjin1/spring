@@ -23,4 +23,13 @@ public class Chart {
 	private String comm;
 	private String deptno;
 	
+	private String code;
+	private String kind;
+	private String codeName;
+	
+	private String itemNo;
+	private String itemName;
+	private String category1;
+	
+	
 }
