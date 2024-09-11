@@ -103,4 +103,30 @@ public class ChartController {
 		resultMap.put("result", "success");
 		return new Gson().toJson(resultMap);
 	}
+	@RequestMapping("/api.do")
+	  public String api(Model model) throws Exception{
+
+		return "/api";
+	}
+	@RequestMapping(value = "/areaWeather.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String areaWeather(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = chartservice.Weather(map);
+		return new Gson().toJson(resultMap);
+	}
+	@RequestMapping(value = "/areaWeatherGu.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String areaWeatherGu(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = chartservice.WeatherGu(map);
+		return new Gson().toJson(resultMap);
+	}
+	@RequestMapping(value = "/areaWeatherDong.dox", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	@ResponseBody
+	public String areaWeatherDong(Model model, @RequestParam HashMap<String, Object> map) throws Exception {
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap = chartservice.WeatherDong(map);
+		return new Gson().toJson(resultMap);
+	}
 }

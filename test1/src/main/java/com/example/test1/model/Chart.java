@@ -14,6 +14,9 @@ public class Chart {
 	private String gu;
 	private String dong;
 	
+	private String nx;
+	private String ny;
+	
 	private String empno;
 	private String ename;
 	private String job;

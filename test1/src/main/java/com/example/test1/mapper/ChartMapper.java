@@ -33,4 +33,8 @@ public interface ChartMapper {
 	//codeList
 	List<Chart> codeList(HashMap<String, Object> map);
 	
+	//weather
+	List<Chart> selectWeather(HashMap<String, Object> map);
+	List<Chart> selectWeatherGu(HashMap<String, Object> map);
+	List<Chart> selectWeatherDong(HashMap<String, Object> map);
 }

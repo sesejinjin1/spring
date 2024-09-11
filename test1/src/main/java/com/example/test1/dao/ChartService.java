@@ -18,4 +18,8 @@ public interface ChartService {
 	//itemList
 	HashMap<String, Object> itemList(HashMap<String, Object> map);
 	
+	//selectWeather si,gu,dong
+	HashMap<String, Object> Weather(HashMap<String, Object> map);
+	HashMap<String, Object> WeatherGu(HashMap<String, Object> map);
+	HashMap<String, Object> WeatherDong(HashMap<String, Object> map);
 }

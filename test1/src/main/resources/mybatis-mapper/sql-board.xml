@@ -4,8 +4,19 @@
 
 <mapper namespace="com.example.test1.mapper.BoardMapper">
 	<select id="selectBoardList" parameterType="hashmap" resultType="com.example.test1.model.Board">
-		SELECT * FROM TBL_BOARD B 
+		SELECT B.*, U.*,
+       		CASE 
+           		WHEN TRUNC(B.CDATETIME) = TRUNC(SYSDATE) THEN TO_CHAR(B.CDATETIME, 'HH24:MI:SS')
+           		ELSE TO_CHAR(B.CDATETIME, 'YYYY-MM-DD')
+       		END AS CDATETIME2,
+       		NVL(CNT,0) AS CNT
+		FROM TBL_BOARD B 
 		INNER JOIN TBL_USER U ON B.USERID = U.USERID 
+		LEFT JOIN(
+				    SELECT BOARDNO , COUNT(BOARDNO) AS CNT
+				    FROM TBL_COMMENT 
+				    GROUP BY BOARDNO
+				)C ON B.BOARDNO = C.BOARDNO 
 		WHERE 1=1
 		<if test="cateNum !='' and cateNum != null">
 			AND CATEGORY = #{cateNum}
@@ -23,6 +34,17 @@
 		ORDER BY CDATETIME DESC  
 		OFFSET #{startIndex} ROWS FETCH FIRST #{outputNumber} ROWS ONLY 
 		
+		
+		<!--
+		댓글 카운트
+		SELECT B.BOARDNO, TITLE , NVL(CNT,0) AS CNT
+		FROM TBL_BOARD B 
+		LEFT JOIN(
+		    SELECT BOARDNO , COUNT(BOARDNO) AS CNT
+		    FROM TBL_COMMENT 
+		    GROUP BY BOARDNO
+		)C ON B.BOARDNO = C.BOARDNO;
+		-->
 		
 		<!--<choose>
 			<when test="searchOption == 'title'">

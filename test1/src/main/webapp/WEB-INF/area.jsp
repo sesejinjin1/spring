@@ -60,7 +60,6 @@
             } 
         },
         mounted() {
-			
             var self = this;
 			self.fnGetList();
 			

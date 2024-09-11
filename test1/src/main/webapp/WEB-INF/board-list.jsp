@@ -56,10 +56,10 @@
 			<tr v-for="item in list">
 				<td><input type="checkbox" v-model="selectItem" :value="item.boardNo"></td>
 				<td>{{item.boardNo}}</td>
-				<td><a href="#" @click="fnView(item.boardNo)">{{item.title}}</a></td>
+				<td><a href="#" @click="fnView(item.boardNo)">{{item.title}} [{{item.cnt}}]</a></td>
 				<td><a href="#" @click="fnUserInfo(item.userId)">{{item.userName}}</a></td>
 				<td>{{item.hit}}</td>
-				<td>{{item.cdateTime}}</td>
+				<td>{{item.cdateTime2}}</td>
 				<td><button @click="fnRemove(item.boardNo)">삭제</button></td>
 			</tr>
 		</table>

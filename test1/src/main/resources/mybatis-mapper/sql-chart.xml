@@ -48,6 +48,33 @@
 	<select id="codeList" parameterType="hashmap" resultType="com.example.test1.model.Chart">
 		SELECT * FROM TBL_CODE
 	</select>
-
+	
+	<select id="selectWeather" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT DISTINCT SI 
+		FROM AREA ORDER BY SI
+	</select>
+	
+	<select id="selectWeatherGu" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT SI, GU 
+		FROM AREA 
+		WHERE SI = #{si} AND GU IS NOT NULL 
+		GROUP BY SI, GU 
+		ORDER BY GU
+	</select>
+	
+	<select id="selectWeatherDong" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT SI, GU ,DONG ,NX,NY
+		FROM AREA 
+		WHERE SI = #{si} AND GU = #{gu} AND DONG IS NOT NULL 
+		GROUP BY SI, GU ,DONG ,NX,NY
+		ORDER BY DONG
+	</select>
+	
+	<!--<select id="selectWeatherXy" parameterType="hashmap" resultType="com.example.test1.model.Chart">
+		SELECT * 
+		FROM AREA 
+		WHERE SI = #{si} AND GU = #{gu} AND DONG = #{dong} 
+	</select>-->
+	
 	
 </mapper>
